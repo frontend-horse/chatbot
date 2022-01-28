@@ -1,0 +1,1 @@
+# `SomeAnticsBot` - A Twitch Chatbot for Some Antics
