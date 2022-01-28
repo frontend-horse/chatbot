@@ -1,6 +1,12 @@
 const tmi = require('tmi.js');
 require('dotenv').config();
 
+const searchForStream = require('./commands/stream');
+
+const commands = {
+	stream: searchForStream
+};
+
 const client = new tmi.Client({
 	connection: {
 		secure: true,
@@ -15,6 +21,17 @@ const client = new tmi.Client({
 
 client.connect();
 
+const COMMAND_REGEX = new RegExp(/^!([a-zA-Z0-9]+)(?:\W+)?(.*)?/);
+
 client.on('message', (channel, tags, message, self) => {
-	console.log(`${tags['display-name']}: ${message}`);
+	// console.log(`${tags['display-name']}: ${message}`);
+	const isBot = tags.username.toLowerCase() === process.env.TWITCH_BOT_USERNAME;
+	if (isBot) return;
+
+	const [raw, command, body] = message.match(COMMAND_REGEX);
+	if (command) {
+		const noop = () => {};
+		const executeCommand = commands[command] || noop;
+		executeCommand(command, body);
+	}
 });
