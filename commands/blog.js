@@ -8,7 +8,7 @@ const index = algoliaClient.initIndex(process.env.ALGOLIA_BLOG_INDEX_ID);
  * @param {'blog'} command - triggered command
  * @param {string} body - message body after the command
  */
-module.exports = function searchForStream(client, command, body) {
+module.exports = function searchForBlogPost(client, command, body) {
 	try {
 		index
 			.search(
