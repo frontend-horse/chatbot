@@ -4,11 +4,11 @@ const algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGO
 const index = algoliaClient.initIndex(process.env.ALGOLIA_INDEX_ID);
 
 /**
- * 
- * @param {'!stream'} command - triggered command
+ * @param {import('tmi.js').Client} client - Twitch chat client
+ * @param {'stream'} command - triggered command
  * @param {string} body - message body after the command
  */
-module.exports = function searchForStream(command, body) {
+module.exports = function searchForStream(client, command, body) {
 	try {
 		index
 			.search(
@@ -27,9 +27,9 @@ module.exports = function searchForStream(command, body) {
 				const {url: path = '', title = '', keywords = []} = hit;
 				const youtubeUrl = keywords.find(kw => kw.includes('youtu.be') || kw.includes('youtube.com'));
 				const url = youtubeUrl || `https://someantics.dev${path}`;
-				console.log(`Check out "${title}" at ${url}!`);
+				client.say('SomeAnticsDev', `Check out "${title}" at ${url}!`);
 			})
 	} catch (err) {
-
+		console.error({err});
 	}
 }

@@ -32,6 +32,6 @@ client.on('message', (channel, tags, message, self) => {
 	if (command) {
 		const noop = () => {};
 		const executeCommand = commands[command] || noop;
-		executeCommand(command, body);
+		executeCommand(client, command, body);
 	}
 });
