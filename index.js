@@ -1,9 +1,11 @@
 const tmi = require('tmi.js');
 require('dotenv').config();
 
+const searchForBlogPost = require('./commands/blog');
 const searchForStream = require('./commands/stream');
 
 const commands = {
+	blog: searchForBlogPost,
 	stream: searchForStream
 };
 

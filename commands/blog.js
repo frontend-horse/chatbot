@@ -1,11 +1,11 @@
 const algoliasearch = require('algoliasearch');
 
-const algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
-const index = algoliaClient.initIndex(process.env.ALGOLIA_INDEX_ID);
+const algoliaClient = algoliasearch(process.env.ALGOLIA_BLOG_APP_ID, process.env.ALGOLIA_BLOG_API_KEY);
+const index = algoliaClient.initIndex(process.env.ALGOLIA_BLOG_INDEX_ID);
 
 /**
  * @param {import('tmi.js').Client} client - Twitch chat client
- * @param {'stream'} command - triggered command
+ * @param {'blog'} command - triggered command
  * @param {string} body - message body after the command
  */
 module.exports = function searchForStream(client, command, body) {
@@ -14,7 +14,7 @@ module.exports = function searchForStream(client, command, body) {
 			.search(
 				body,
 				{
-					attributesToRetrieve: ['url', 'title', 'keywords'],
+					attributesToRetrieve: ['url', 'title'],
 					hitsPerPage: 1
 				}
 			)
@@ -24,9 +24,8 @@ module.exports = function searchForStream(client, command, body) {
 				}
 
 				const [hit] = hits;
-				const {url: path = '', title = '', keywords = []} = hit;
-				const youtubeUrl = keywords.find(kw => kw.includes('youtu.be') || kw.includes('youtube.com'));
-				const url = youtubeUrl || `https://someantics.dev${path}`;
+				const {url: path = '', title = ''} = hit;
+				const url = `https://benmyers.dev${path}`;
 				client.say(process.env.TWITCH_BROADCASTER_USERNAME, `Check out "${title}" at ${url}!`);
 			})
 	} catch (err) {
