@@ -2,6 +2,7 @@ const tmi = require('tmi.js');
 require('dotenv').config();
 
 const searchForBlogPost = require('./commands/blog');
+const listCommands = require('./commands/commands');
 const searchForStream = require('./commands/stream');
 const shoutOut = require('./commands/so');
 
@@ -35,10 +36,12 @@ const commands = {
 	// Simple call-and-response commands
 	discord: () => say('Looking for inclusive web development communities online? Join the Lunch Dev Discord (https://discord.gg/lunchdev) and the Frontend Horse Discord (https://frontend.horse/chat)!'),
 	theme: () => say('The VS Code theme is Night Mind, by @b1mind! Check it out at https://marketplace.visualstudio.com/items?itemName=b1m1nd.night-mind'),
+	twitter: () => say('Follow Some Antics on Twitter at https://twitter.com/SomeAnticsDev'),
 	uses: () => say(`Check out Ben's whole setup at https://benmyers.dev/uses/!`),
 
 	// More complicated commands
 	blog: searchForBlogPost,
+	commands: listCommands,
 	stream: searchForStream
 };
 
