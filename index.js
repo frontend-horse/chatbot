@@ -3,6 +3,7 @@ require('dotenv').config();
 
 // const searchForBlogPost = require('./commands/blog');
 const searchForStream = require('./commands/stream');
+const shoutOut = require('./commands/so');
 
 const client = new tmi.Client({
 	connection: {
@@ -49,6 +50,7 @@ const moderatorCommands = {
 	reactpodcast: () => say('Join the Lunch Dev Discord server! https://discord.gg/lunchdev'),
 
 	// More complicated commands
+	so: shoutOut
 };
 
 const COMMAND_REGEX = new RegExp(/^!([a-zA-Z0-9]+)(?:\W+)?(.*)?/);
@@ -58,11 +60,11 @@ client.on('message', (channel, tags, message, self) => {
 	const isBot = tags.username.toLowerCase() === process.env.TWITCH_BOT_USERNAME;
 	if (isBot) return;
 
-	const [raw, command, body] = message.match(COMMAND_REGEX);
 	const isBroadcaster = tags.username.toLowerCase() === channel;
 	const isMod = isBroadcaster || tags.mod;
-
-	if (command) {
+	
+	if (message.startsWith('!')) {
+		const [raw, command, body] = message.match(COMMAND_REGEX);
 		const noop = () => {};
 
 		const executeCommand = 
