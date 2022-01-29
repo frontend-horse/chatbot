@@ -1,7 +1,7 @@
 const tmi = require('tmi.js');
 require('dotenv').config();
 
-// const searchForBlogPost = require('./commands/blog');
+const searchForBlogPost = require('./commands/blog');
 const searchForStream = require('./commands/stream');
 const shoutOut = require('./commands/so');
 
@@ -38,7 +38,7 @@ const commands = {
 	uses: () => say(`Check out Ben's whole setup at https://benmyers.dev/uses/!`),
 
 	// More complicated commands
-	// blog: searchForBlogPost,
+	blog: searchForBlogPost,
 	stream: searchForStream
 };
 

@@ -9,6 +9,7 @@ const names = {
 	genericmikechen: 'Mike',
 	geometricjim: 'Jim',
 	jlengstorf: 'Jason',
+	kevinpowellcss: 'Kevin',
 	lunchdev: 'Michael',
 	mannimoki: 'Manny',
 	maxcellw: 'Prince',
