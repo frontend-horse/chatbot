@@ -38,6 +38,7 @@ const commands = {
 	theme: () => say('The VS Code theme is Night Mind, by @b1mind! Check it out at https://marketplace.visualstudio.com/items?itemName=b1m1nd.night-mind'),
 	twitter: () => say('Follow Some Antics on Twitter at https://twitter.com/SomeAnticsDev'),
 	uses: () => say(`Check out Ben's whole setup at https://benmyers.dev/uses/!`),
+	uses: () => say(`Catch up with previous streams at https://someantics.dev/youtube!`),
 
 	// More complicated commands
 	blog: searchForBlogPost,

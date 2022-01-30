@@ -7,7 +7,8 @@ const availableCommands = [
 	'!theme',
 	'!tuna',
 	'!twitter',
-	'!uses'
+	'!uses',
+	'!youtube'
 ];
 
 /**
