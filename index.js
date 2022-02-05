@@ -49,7 +49,7 @@ const commands = {
 /** @type {Object<string, Command>} */
 const moderatorCommands = {
 	// Simple call-and-response commands
-	frontendhorse: () => say('Join the Frontend Horse Discord! https://frontendhorse.chat'),
+	frontendhorse: () => say('Join the Frontend Horse Discord! https://frontend.horse/chat'),
 	lunchdev: () => say('Join the Lunch Dev Discord server! https://discord.gg/lunchdev'),
 	reactpodcast: () => say('Join the Lunch Dev Discord server! https://discord.gg/lunchdev'),
 
@@ -64,7 +64,7 @@ client.on('message', (channel, tags, message, self) => {
 	const isBot = tags.username.toLowerCase() === process.env.TWITCH_BOT_USERNAME;
 	if (isBot) return;
 
-	const isBroadcaster = tags.username.toLowerCase() === channel;
+	const isBroadcaster = tags.username.toLowerCase() === channel.toLowerCase();
 	const isMod = isBroadcaster || tags.mod;
 	
 	if (message.startsWith('!')) {
