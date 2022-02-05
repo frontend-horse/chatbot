@@ -54,6 +54,7 @@ const moderatorCommands = {
 	reactpodcast: () => say('Join the Lunch Dev Discord server! https://discord.gg/lunchdev'),
 
 	// More complicated commands
+	shoutout: shoutOut,
 	so: shoutOut
 };
 

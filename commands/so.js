@@ -54,45 +54,26 @@ const extraDetails = {
 };
 
 /**
- * 
- * @param {string} username - channel being shouted out
- * @returns {string} display name
- */
-async function getDisplayName(username) {
-	const user = await twitchApi.users.getUserByName(username);
-	return user.displayName;
-}
-
-/**
- * Gets the shouted-out channel's most recent stream title, if there is one.
- * 
- * @param {string} username - channel being shouted out
- * @returns {string | null} - title of channel's most recent stream
- */
-async function getLatestStream(username) {
-	const user = await twitchApi.users.getUserByName(username);
-	const channel = await twitchApi.channels.getChannelInfo(user.id);
-	return channel.title;
-}
-
-/**
  * Command to shout out a fellow streamer
  * 
  * @param {import('tmi.js').Client} client - Twitch chat client
- * @param {'so'} command - triggered command
+ * @param {'shoutout' | 'so'} command - triggered command
  * @param {string} body - message body after the command
  */
  module.exports = async function shoutOut(client, command, body) {
 	try {
 		if (!body) return;
 
-		let [streamer] = body.split(' ');
-		streamer = streamer.replace('@', '');
+		let [username] = body.split(' ');
+		username = username.replace('@', '');
+		const user = await twitchApi.users.getUserByName(username);
+		const channel = await twitchApi.channels.getChannelInfo(user.id);
 
-		const displayName = await getDisplayName(streamer);
+		const displayName = user?.displayName;
+		const firstName = streamerDetails?.name || `@${displayName}`;
 		const url = `https://twitch.tv/${displayName}`;
-		const streamerDetails = extraDetails[streamer.toLowerCase()];
-		const name = streamerDetails?.name || `@${displayName}`;
+		const streamerDetails = extraDetails[username.toLowerCase()];
+		
 		const sentences = [
 			`Go check out @${displayName} at ${url}!`
 		];
@@ -101,9 +82,9 @@ async function getLatestStream(username) {
 			sentences.push(streamerDetails.additionalMessage);
 		}
 
-		const latestStream = await getLatestStream(streamer);
-		if (latestStream) {
-			sentences.push(`${name}'s most recent stream was "${latestStream}"`);
+		// User has a recent enough stream with a holdover title
+		if (channel?.title) {
+			sentences.push(`${firstName}'s most recent stream was "${channel.title}"`);
 		}
 
 		const message = sentences.join(' ');
