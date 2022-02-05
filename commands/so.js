@@ -30,9 +30,10 @@ const extraDetails = {
 	},
 	kevinpowellcss: {
 		name: 'Kevin',
+		additionalMessage: `Kevin's streams about CSS and more are incredibly informative.`
 	},
 	lunchdev: {
-		name: 'Michael',
+		name: 'Chan',
 	},
 	mannimoki: {
 		name: 'Manny',
@@ -46,10 +47,11 @@ const extraDetails = {
 	},
 	trostcodes: {
 		name: 'Alex',
-		additionalMessage: `Alex's Frontend Horse streams with guests from around web development and web design are a great way to dive into creative coding!`
+		additionalMessage: `Alex's Frontend Horse streams, featuring guests from around web development and web design, are a great way to dive into creative coding!`
 	},
 	whitep4nth3r: {
 		name: 'Salma',
+		additionalMessage: `Salma's streams are jam-packed with Jamstack knowledge and more!`
 	}
 };
 
