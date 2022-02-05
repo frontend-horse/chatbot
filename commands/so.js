@@ -70,9 +70,9 @@ const extraDetails = {
 		const channel = await twitchApi.channels.getChannelInfo(user.id);
 
 		const displayName = user?.displayName;
-		const firstName = streamerDetails?.name || `@${displayName}`;
 		const url = `https://twitch.tv/${displayName}`;
 		const streamerDetails = extraDetails[username.toLowerCase()];
+		const firstName = streamerDetails?.name || `@${displayName}`;
 		
 		const sentences = [
 			`Go check out @${displayName} at ${url}!`
