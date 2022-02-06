@@ -9,6 +9,9 @@ const extraDetails = {
 	ajcwebdev: {
 		name: 'Anthony'
 	},
+	b1mind: {
+		name: 'Brent'
+	},
 	buildingbedrocklayout: {
 		name: 'Travis',
 		additionalMessage: `Travis is streaming his progress building out the Bedrock Layout component library.`
