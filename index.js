@@ -38,7 +38,7 @@ const commands = {
 	theme: () => say('The VS Code theme is Night Mind, by @b1mind! Check it out at https://marketplace.visualstudio.com/items?itemName=b1m1nd.night-mind'),
 	twitter: () => say('Follow Some Antics on Twitter at https://twitter.com/SomeAnticsDev'),
 	uses: () => say(`Check out Ben's whole setup at https://benmyers.dev/uses/!`),
-	uses: () => say(`Catch up with previous streams at https://someantics.dev/youtube!`),
+	youtube: () => say(`Catch up with previous streams at https://someantics.dev/youtube!`),
 
 	// More complicated commands
 	blog: searchForBlogPost,
@@ -60,13 +60,15 @@ const moderatorCommands = {
 
 const COMMAND_REGEX = new RegExp(/^!([a-zA-Z0-9]+)(?:\W+)?(.*)?/);
 
-client.on('message', (channel, tags, message, self) => {
+client.on('message', (ircChannel, tags, message, self) => {
 	// console.log(`${tags['display-name']}: ${message}`);
 	const isBot = tags.username.toLowerCase() === process.env.TWITCH_BOT_USERNAME;
 	if (isBot) return;
 
-	const isBroadcaster = tags.username.toLowerCase() === channel.toLowerCase();
+	const channel = ircChannel.toLowerCase().replace('#', '');
+	const isBroadcaster = tags.username.toLowerCase() === channel;
 	const isMod = isBroadcaster || tags.mod;
+	// console.log({isBroadcaster, isMod, channel})
 	
 	if (message.startsWith('!')) {
 		const [raw, command, body] = message.match(COMMAND_REGEX);
