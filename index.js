@@ -37,6 +37,10 @@ const commands = {
     say(
       "Join the friendly and creative Frontend Horse Discord! https://frontend.horse/chat"
     ),
+  website: () =>
+    say(
+      "Read articles, a newsletter, and find out all about creative Web Dev: https://frontend.horse/"
+    ),
   theme: () =>
     say(
       "The VS Code theme is Free Code Camp Dark Theme - https://www.freecodecamp.org/news/vs-code-dark-mode-theme/"

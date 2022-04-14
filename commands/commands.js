@@ -1,6 +1,5 @@
 const availableCommands = [
   "!blog <search query>",
-  "!chan",
   "!commands",
   "!discord",
   "!stream <search query>",
@@ -8,6 +7,7 @@ const availableCommands = [
   "!twitter",
   "!uses",
   "!youtube",
+  "!website",
 ];
 
 /**
